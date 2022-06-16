@@ -23,7 +23,25 @@ const url = require("url");
 ////////////////////////////////////////
 
 const server = http.createServer((req, res) => {
-  res.end("Hello from the server!");
+  var pathName = req.url;
+  if (pathName == "/" || pathName == "/overview") {
+    res.end("This is the root");
+  } else if (pathName == "/product") {
+    res.end("This is the product");
+  } else if (pathName == "/api") {
+    res.writeHead(200, { "Content-type": "application/json" });
+    const data = fs.readFile(
+      `${__dirname}/dev-data/data.json`,
+      "utf-8",
+      (err, data) => {
+        const productData = JSON.parse(data);
+        console.log(productData);
+      }
+    );
+    res.end("API");
+  } else {
+    res.end("Page not found!");
+  }
 });
 
 server.listen(8000, "127.0.0.1", () => {
