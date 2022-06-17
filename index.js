@@ -22,6 +22,19 @@ const url = require("url");
 //////////////Server///////////////////
 ////////////////////////////////////////
 
+const tempOverview = fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  "utf-8"
+);
+const tempCard = fs.readFileSync(
+  `${__dirname}/templates/template-card.html`,
+  "utf-8"
+);
+const tempProduct = fs.readFileSync(
+  `${__dirname}/templates/template-product.html`,
+  "utf-8"
+);
+
 const server = http.createServer((req, res) => {
   var pathName = req.url;
   if (pathName == "/" || pathName == "/overview") {
