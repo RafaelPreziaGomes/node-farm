@@ -1,5 +1,24 @@
 {
   "dependencies": {
-    "fs": "^0.0.1-security"
-  }
+    "fs": "^0.0.1-security",
+    "slugify": "^1.6.5",
+    "slugs": "^0.1.3"
+  },
+  "name": "farm",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaelPreziaGomes/node-farm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RafaelPreziaGomes/node-farm/issues"
+  },
+  "homepage": "https://github.com/RafaelPreziaGomes/node-farm#readme"
 }

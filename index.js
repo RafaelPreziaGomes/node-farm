@@ -1,6 +1,9 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+const slugify = require('slugify');
+const replaceTemplate = require('./modules/replaceTemplate');
+
 // // blocking synchrinomous way
 // const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
 // console.log(textIn);
@@ -22,22 +25,40 @@ const url = require("url");
 //////////////Server///////////////////
 ////////////////////////////////////////
 
+
+
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+const dataObj = JSON.parse(data);
+
+
+
+const slugs = dataObj.map(el => slugify(el.productName, { lower: true }));
+console.log(slugs);
+
+
+const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`, 'utf-8')
+const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`, 'utf-8')
+const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.html`, 'utf-8')
+
 const server = http.createServer((req, res) => {
   var pathName = req.url;
   if (pathName == "/" || pathName == "/overview") {
-    res.end("This is the root");
+    res.writeHead(200, {'Content-type' : 'text/html'});
+    
+    const cardsHtml = dataObj.map(el => replaceTemplate(tempCard, el)).join('');
+    const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
+    res.end(output);
+
+
   } else if (pathName == "/product") {
-    res.end("This is the product");
+    res.writeHead(200, {'Content-type' : 'text/html'});
+    const product = dataObj[query.id];
+    const output = replaceTemplate(tempProduct, product);
+    res.end(output);
+   
   } else if (pathName == "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
-    const data = fs.readFile(
-      `${__dirname}/dev-data/data.json`,
-      "utf-8",
-      (err, data) => {
-        const productData = JSON.parse(data);
-        console.log(productData);
-      }
-    );
+  
     res.end("API");
   } else {
     res.end("Page not found!");
