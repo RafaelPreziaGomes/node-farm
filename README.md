@@ -14,6 +14,8 @@ A simple node application in which I tackled to use node js in order to create a
 ## Installation
 
 ```
+git clone repository
+cd my-project
 node index.js
 
 ```
