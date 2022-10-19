@@ -40,4 +40,4 @@ For support, email raffbusiness132@gmail.com or join our Slack channel.
 ## Appendix
 
 
-This website might not be fully functional as it is currently in maintenance
+This website might not be fully functional as it is currently in maintenance.
